@@ -8,23 +8,6 @@ require_once "../resources/config.php";
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
     <title>Testing page</title>
-
-    <style>
-        #suggestions {
-            position: fixed;
-            z-index: 2;
-        }
-
-        .suggestion-item {
-            background-color: #dddddd;
-            margin: 2px;
-            user-select: none;
-        }
-
-        .suggestion-item:hover {
-            background-color: #888888;
-        }
-    </style>
 </head>
 <body>
 <h1>A page for testing stuff</h1>

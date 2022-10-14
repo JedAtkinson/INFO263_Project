@@ -1,12 +1,19 @@
-table {
-    border-collapse: collapse;
-    width: 70%;
-    border: 2px solid #aaaaaa;
-    margin: 10px;
+.employer_search {
+    text-align: center;
+    width: 80%;
+    display: block;
+    margin: auto;
 }
 
-td, th {
-    border: 1px solid #dddddd;
+#employer_search_box {
+    width: 100%;
+}
+
+.suggestion-item {
     text-align: left;
-    padding: 8px;
+    user-select: none;
+}
+
+.suggestion-item:hover {
+    background-color: #eeeeee;
 }

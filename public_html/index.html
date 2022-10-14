@@ -2,19 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="js/script.js"></script>
+    <title>Open Review Portal</title>
+
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+
+<h1>Open Review Portal</h1>
+
 <nav>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="employer_rankings.php">Employer Rankings</a></li>
-    <li><a href="review_employer.php">Review an Employer</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="employer_rankings.php">Employer Rankings</a></li>
+      <li><a href="review_employer.php">Review an Employer</a></li>
+      <li><a href="login.php">Login</a></li>
+      <li><a href="new_account.php">Create Account</a></li>
   </ul>
 </nav>
-<h1>OpenReview Project Skeleton</h1>
-<img src="img/E16.jpg" width="500" alt="UC E16 lecture theatre."/>
+
+<div class="employer_search">
+    <h2>Search Employers</h2>
+    <form method="get" action="employer_rankings.php">
+        <input type="text" id="employer_search_box" name="search_term" placeholder="Search">
+        <div id="employer_search_suggestions"></div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="js/script.js"></script>
+
+<script>
+    $("#employer_search_box").keyup(function() {
+        $("#employer_search_suggestions").html(update_employer_suggestions($("#employer_search_box").val()));
+    });
+
+    $("#employer_search_suggestions").on('click', '.suggestion-item', function() {
+        $("#employer_search_box").val($(this).text());
+        $("#employer_search_suggestions").html(update_employer_suggestions($("#employer_search_box").val()))
+    });
+</script>
 </body>
 </html>
