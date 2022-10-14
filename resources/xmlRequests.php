@@ -9,7 +9,7 @@ if (isset($_GET["search"])) {
 
     $c = 0;
     while ($row = $result->fetch() and $c < 5) {
-        echo "<div class='suggestion-item'>" . $row["company_name"] . "</div>";
+        echo "<div class='suggestion-item' autocomplete='off' tabindex='0'>" . $row["company_name"] . "</div>";
         $c++;
     }
 }

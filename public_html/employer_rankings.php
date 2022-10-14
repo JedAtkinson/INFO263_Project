@@ -7,34 +7,34 @@
 <body>
 <h1>Employer Ratings</h1>
 <?php
+require_once "../resources/config.php";
+
 if (isset($_GET["search_term"])) {
-    echo "<h2 id='company_name'>".$_GET["search_term"]."</h2>";
+    $pdo = openConnection();
+    $query = "SELECT * FROM open_review.reviewedemployer_s WHERE company_name = '" . $_GET["search_term"]."'";
+    $result = $pdo->query($query);
+    $pdo = null;
+
+    if ($result->rowCount() === 0) {
+        echo "<p>No data on this employer</p>";
+        echo "<button>Add review</button>";
+    } else {
+        $c = 0;
+        $row = $result->fetch();
+
+        echo "<h2><img alt='".$row["company_name"]." Logo' height='16' width='16' style='padding-right: 10px;' src='http://www.google.com/s2/favicons?domain=".$row["company_url"]."'>";
+        echo $row['company_name']."</h2>";
+
+        foreach ($row as $key => $value) {
+            $name = ucfirst(implode(" ", explode("_", $key)));
+            echo "<p><b>".$name.":</b> ".$value."</p>";
+        }
+    }
 }
 ?>
 
-<table id="reviews_table">
-    <tr>
-        <th>Advice</th>
-        <th>Pros</th>
-        <th>Cons</th>
-    </tr>
-</table>
-
-<button onclick="load_more_button()">Load More</button>
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="js/script.js"></script>
-
-<script>
-    let limit = 0
-    load_reviews($("#company_name").text(), limit);
-    limit += 20;
-
-    function load_more_button() {
-        (load_reviews($("#company_name").text(), limit));
-        limit += 20;
-    }
-</script>
 </body>
 </html>
 

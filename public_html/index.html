@@ -36,9 +36,8 @@
         $("#employer_search_suggestions").html(update_employer_suggestions($("#employer_search_box").val()));
     });
 
-    $("#employer_search_suggestions").on('click', '.suggestion-item', function() {
+    $("#employer_search_suggestions").on('focus', '.suggestion-item', function() {
         $("#employer_search_box").val($(this).text());
-        $("#employer_search_suggestions").html(update_employer_suggestions($("#employer_search_box").val()))
     });
 </script>
 </body>
