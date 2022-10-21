@@ -11,21 +11,16 @@
 <h1>Open Review Portal</h1>
 
 <nav>
-  <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="employer_rankings.php">Employer Rankings</a></li>
-      <li><a href="review_employer.php">Review an Employer</a></li>
-      <li><a href="login.php">Login</a></li>
-      <li><a href="new_account.php">Create Account</a></li>
-  </ul>
+  <a href="index.html">Home</a>
+  <a href="employer_rankings.php">Employer Rankings</a>
+  <a href="review_employer.php">Review an Employer</a>
+  <a href="employer_reviews.php">View Reviews</a>
 </nav>
 
 <div class="employer_search">
-    <h2>Search Employers</h2>
-    <form method="get" action="employer_rankings.php">
-        <input type="text" id="employer_search_box" name="search_term" placeholder="Search">
-        <div id="employer_search_suggestions"></div>
-    </form>
+    <h2><label for="employer_search_box">Search Employers</label></h2>
+    <input type="text" id="employer_search_box" name="search_term" placeholder="Search" autocomplete="off">
+    <div id="employer_search_suggestions"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -34,6 +29,10 @@
 <script>
     $("#employer_search_box").keyup(function() {
         $("#employer_search_suggestions").html(update_employer_suggestions($("#employer_search_box").val()));
+    });
+
+    $("#employer_search_suggestions").on("click", '.suggestion-item', function() {
+        window.location.href = "employer_rankings.php?employer="+this.id;
     });
 
     $("#employer_search_suggestions").on('focus', '.suggestion-item', function() {

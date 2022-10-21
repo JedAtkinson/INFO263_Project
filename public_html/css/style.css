@@ -1,3 +1,7 @@
+body {
+    background-color: #eeffee;
+}
+
 .employer_search {
     text-align: center;
     width: 80%;
@@ -7,6 +11,15 @@
 
 #employer_search_box {
     width: 100%;
+    border-radius: 5px;
+    height: 20px;
+    margin: 10px 0 0;
+}
+
+#employer_search_suggestions {
+    background-color: #eeeeee;
+    position: absolute;
+    z-index: 2;
 }
 
 .suggestion-item {
@@ -16,4 +29,24 @@
 
 .suggestion-item:hover {
     background-color: #eeeeee;
+}
+
+.valid_input {
+    border: 3px solid green !important;
+}
+
+.invalid-input {
+    border: 3px solid red !important;
+}
+
+nav {
+    text-align: center;
+    padding: 50px;
+}
+
+nav a {
+    color: blue;
+    padding: 7px;
+    margin: 30px;
+    text-decoration: none;
 }

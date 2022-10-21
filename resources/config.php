@@ -36,4 +36,64 @@ function closeConnection($pdo)
 {
     $pdo = null;
 }
+
+function searchEmployers($search_term, $num_results) {
+    $pdo = openConnection();
+    $query = "SELECT employer_id, company_name, company_url FROM open_review.employer WHERE company_name LIKE '" . $search_term . "%' LIMIT $num_results";
+    $result = $pdo->query($query);
+    $pdo = null;
+
+    return $result;
+}
+
+function getEmployersReviews($employer, $range_min, $range_max) {
+    $pdo = openConnection();
+    $query = "SELECT * FROM employerreview_s WHERE employerId = (SELECT employer_id FROM open_review.employer WHERE company_name = '" . $employer . "') LIMIT ".$range_min.", ".$range_max;
+    $result = $pdo->query($query);
+    $pdo = null;
+
+    return $result;
+}
+
+function display_as_table($result, $columns) {
+    $table = "<table><tr>";
+    foreach ($columns as $col) {
+        $name = ucfirst(implode(" ", preg_split('/(?=[A-Z])/',$col)));
+        $table .= "<th id=".$col.">".$name."</th>";
+    }
+    $table .= "</tr>";
+    while ($row = $result->fetch()) {
+        $table .= "<tr>";
+        foreach ($columns as $col) {
+            $table .= "<td>".$row[$col]."</td>";
+        }
+        $table .= "</tr>";
+    }
+    $table .= "</table>";
+
+    return $table;
+}
+
+function get_reviewed_employer($employer) {
+    $pdo = openConnection();
+    $query = "SELECT * FROM reviewedemployer_s WHERE employer_id = ".$employer;
+    $result = $pdo->query($query);
+    $pdo = null;
+
+    return $result;
+}
+
+function add_review($data) {
+    try {
+        $pdo = openConnection();
+        $query = "INSERT INTO employerreview_s (" . implode(', ', array_keys($data)) . ") 
+        VALUES " . implode(', ', array_values($data)) . ")";
+        $pdo->exec($query);
+        return true;
+    } catch(PDOException $e) {
+        return $e->getMessage();
+    }
+
+    $pdo = null;
+}
 ?>

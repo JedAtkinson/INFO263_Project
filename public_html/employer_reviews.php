@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employer Rankings</title>
+    <title>Employer Reviews</title>
+
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <h1>Employer Ratings</h1>
@@ -12,13 +14,9 @@ if (isset($_GET["search_term"])) {
 }
 ?>
 
-<table id="reviews_table">
-    <tr>
-        <th>Advice</th>
-        <th>Pros</th>
-        <th>Cons</th>
-    </tr>
-</table>
+<div id="reviews_table">
+
+</div>
 
 <button onclick="load_more_button()">Load More</button>
 
@@ -27,12 +25,13 @@ if (isset($_GET["search_term"])) {
 
 <script>
     let limit = 0
+
     load_reviews($("#company_name").text(), limit);
-    limit += 20;
+    limit += 5;
 
     function load_more_button() {
         (load_reviews($("#company_name").text(), limit));
-        limit += 20;
+        limit += 5;
     }
 </script>
 </body>
