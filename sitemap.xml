@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://localhost/public_html/index.php</loc>
+        <lastmod>2022-10-22</lastmod>
+    </url>
+    <url>
+        <loc>http://localhost/public_html/index.php</loc>
+        <lastmod>2022-10-22</lastmod>
+    </url>
+    <url>
+        <loc>http://localhost/public_html/employer_rankings.php</loc>
+        <lastmod>2022-10-22</lastmod>
+    </url>
+    <url>
+        <loc>http://localhost/public_html/employer_reviews.php</loc>
+        <lastmod>2022-10-22</lastmod>
+    </url>
+    <url>
+        <loc>http://localhost/public_html/review_employer.php</loc>
+        <lastmod>2022-10-22</lastmod>
+    </url>
+</urlset>

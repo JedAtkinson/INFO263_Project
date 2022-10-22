@@ -84,16 +84,29 @@ function get_reviewed_employer($employer) {
 }
 
 function add_review($data) {
+    $ints = ["employerId", "isCurrentJob", "lengthOfEmployment", "ratingCareerOpportunities", "ratingCompensationAndBenefits", "ratingCultureAndValues", "ratingDiversityAndInclusion", "ratingOverall", "ratingSeniorLeadership", "ratingWorkLifeBalance"];
+    $values = "(";
+    foreach ($data as $key=>$value) {
+        if (in_array($key, $ints)) {
+            $values .= $value.', ';
+        } elseif ($value === null) {
+            $values .= "null, ";
+        } else {
+            $values .= "'".$value."', ";
+        }
+    }
+    $values = rtrim($values, ", ").")";
     try {
         $pdo = openConnection();
         $query = "INSERT INTO employerreview_s (" . implode(', ', array_keys($data)) . ") 
-        VALUES " . implode(', ', array_values($data)) . ")";
+        VALUES ".$values.";";
         $pdo->exec($query);
+        $pdo = null;
         return true;
     } catch(PDOException $e) {
+        $pdo = null;
+        echo $query."<br><br>";
         return $e->getMessage();
     }
-
-    $pdo = null;
 }
 ?>

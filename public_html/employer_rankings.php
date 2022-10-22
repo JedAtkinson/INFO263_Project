@@ -17,7 +17,7 @@ if (isset($_GET["employer"])) {
 
     if ($result->rowCount() === 0) {
         echo "<p>No data on this employer</p>";
-        echo "<button>Add review</button>";
+        echo "<button onclick=\"location.href='review_employer.php\">Add review</button>";
     } else {
         $row = $result->fetch();
 
@@ -29,6 +29,7 @@ if (isset($_GET["employer"])) {
         echo '<div style="width: 50%; display: inline-block; text-align: center;">';
 
         foreach ($row as $key => $value) {
+            if ($value === null) $value = 0;
             $name = ucfirst(implode(" ", explode("_", $key)));
             echo "<p><b>".$name.":</b></p><p> ".$value."</p>";
         }

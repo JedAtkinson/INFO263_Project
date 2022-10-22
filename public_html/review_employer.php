@@ -1,6 +1,6 @@
 <?php
 require_once "../resources/config.php";
-$values = ["advice","cons","employmentStatus","jobTitle","lengthOfEmployment","pros","ratingBusinessOutlook","ratingCareerOpportunities","ratingCeo","ratingCompensationAndBenefits","ratingCultureAndValues","ratingDiversityAndInclusion","ratingOverall","ratingRecommendToFriend","ratingSeniorLeadership","ratingWorkLifeBalance","summary"];
+$values = ["employerId", "advice","cons","employmentStatus","jobTitle","lengthOfEmployment","pros","ratingBusinessOutlook","ratingCareerOpportunities","ratingCeo","ratingCompensationAndBenefits","ratingCultureAndValues","ratingDiversityAndInclusion","ratingOverall","ratingRecommendToFriend","ratingSeniorLeadership","ratingWorkLifeBalance","summary"];
 
 $all_set = true;
 $data = [];
@@ -21,9 +21,14 @@ if (isset($_GET["isCurrentJob"]) and isset($_GET["jobEndingYear"])) {
 }
 
 if ($all_set) {
-    $data["employerId"] = 1;
     $data["reviewDateTime"] = date('Y-m-d H:i:s');
-    //add_review($data);
+
+    $error = add_review($data);
+    if ($error === true) {
+        echo "Review added successfully";
+    } else {
+        echo $error;
+    }
 }
 ?>
 
@@ -43,9 +48,10 @@ if ($all_set) {
 <form method="get" action="review_employer.php">
     <div style="width: 700px; display: inline-block;">
     <p><label for="employer_search_box">Employer</label></p>
-    <input type="text" id="employer_search_box" name="employer_search_box" required placeholder="Search" autocomplete="off"
-           style="width: 500px" <?php echo (isset($_GET['employer'])) ? 'value="'.$_GET['employer'].'"' : ''; ?>>
+    <input type="text" id="employer_search_box" name="employer_search_box" required placeholder="Search" autocomplete="off" style="width: 500px">
     <div id="employer_search_suggestions"></div>
+
+    <input type="hidden" id="employerId" name="employerId">
 
     <?php
     $text_ratings = array("advice" => "Advice", "pros" => "Pros", "cons" => "Cons", "summary" => "Summary");
@@ -84,7 +90,6 @@ if ($all_set) {
 
         <label for="employmentStatus">Employment Status</label>
         <select id="employmentStatus" name="employmentStatus" required>
-            <option value="NONE">None Selected</option>
             <option value="INTERN">Intern</option>
             <option value="FREELANCE">Freelance</option>
             <option value="CONTRACT">Contract</option>
@@ -96,7 +101,7 @@ if ($all_set) {
         <input type="text" id="jobTitle" name="jobTitle" required>
         <br><br>
         <label for="lengthOfEmployment">Length of Employment</label>
-        <input type="number" id="lengthOfEmployment" name="lengthOfEmployment" required>
+        <input type="number" id="lengthOfEmployment" name="lengthOfEmployment" min="0" max="100" value="0" required>
         <br><br>
 
 <?php
@@ -162,6 +167,7 @@ if ($all_set) {
         $("#employer_search_suggestions").html(update_employer_suggestions($("#employer_search_box").val()));
         $("#employer_search_suggestions").show();
         employer = null;
+        $("#employerId").val(employer);
         $("#employer_search_box").removeClass("valid_input");
         $("#employer_search_box").addClass("invalid-input");
     });
@@ -173,6 +179,7 @@ if ($all_set) {
     $("#employer_search_suggestions").on("click", '.suggestion-item', function() {
         $("#employer_search_suggestions").hide();
         employer = this.id;
+        $("#employerId").val(employer);
         $("#employer_search_box").removeClass("invalid-input");
         $("#employer_search_box").addClass("valid_input");
     });

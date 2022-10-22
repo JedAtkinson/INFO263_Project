@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <meta name="description" content="Open review portal for viewing and adding employer reviews">
+    <meta name="keywords" content="open review, review employer, employers search, company reviews">
+    <meta name="author" content="Jed Atkinson">
+
     <title>Open Review Portal</title>
 
     <link rel="stylesheet" href="css/style.css" />
