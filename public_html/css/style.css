@@ -1,5 +1,31 @@
 body {
     background-color: #eefff5;
+    margin: 50px;
+}
+
+nav {
+    text-align: center;
+    padding: 50px;
+}
+
+nav a {
+    color: blue;
+    padding: 7px;
+    margin: 30px;
+    text-decoration: none;
+}
+
+.employer_logo {
+    padding-right: 20px;
+    width: 16px;
+    height: 16px;
+}
+
+h2 nav {
+    display: inline-block;
+
+    padding: 10px;
+    font-size: 15px;
 }
 
 .employer_search {
@@ -39,14 +65,21 @@ body {
     border: 3px solid red !important;
 }
 
-nav {
-    text-align: center;
-    padding: 50px;
+.left_div {
+    width: 45%;
+    display: inline-block;
 }
 
-nav a {
-    color: blue;
-    padding: 7px;
-    margin: 30px;
-    text-decoration: none;
+.right_div {
+    width: 45%;
+    margin-left: 5%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.review_item {
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 10px 0;
+    background: rgba(0,100,100,0.1);
 }

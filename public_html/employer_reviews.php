@@ -2,15 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="View through our catalog of reviews from thousands of stored employers">
+    <meta name="keywords" content="open review, review employer, employers search, company reviews">
+    <meta name="author" content="Jed Atkinson">
+
     <title>Employer Reviews</title>
 
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<h1>Employer Ratings</h1>
+
+<h1>Employer Reviews</h1>
+
 <?php
-if (isset($_GET["search_term"])) {
-    echo "<h2 id='company_name'>".$_GET["search_term"]."</h2>";
+require_once "../resources/config.php";
+if (isset($_GET["employer"])) {
+    $result = get_employer($_GET["employer"])->fetch();
+
+    echo '
+<nav style="padding: 0px;">
+    <a href="index.php">Home</a>
+    <a href="review_employer.php?employer='.$_GET["employer"].'">Add Review</a>
+    <a href="employer_reviews.php?employer='.$_GET["employer"].'">View Reviews</a>
+</nav>
+        ';
+
+    echo "<h2><img alt='".$result["company_name"]." Logo' class='employer_logo' src='http://www.google.com/s2/favicons?domain=".$result["company_url"]."'>".$result['company_name']."</h2>";
+    echo "<input type='hidden' id='employer_id' value='".$_GET["employer"]."'>";
 }
 ?>
 
@@ -26,11 +44,11 @@ if (isset($_GET["search_term"])) {
 <script>
     let limit = 0
 
-    load_reviews($("#company_name").text(), limit);
+    load_reviews($("#employer_id").val(), limit);
     limit += 5;
 
     function load_more_button() {
-        (load_reviews($("#company_name").text(), limit));
+        (load_reviews($("#employer_id").val(), limit));
         limit += 5;
     }
 </script>

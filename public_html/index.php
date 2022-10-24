@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="description" content="Open review portal for viewing and adding employer reviews">
+    <meta name="description" content="Open review portal for viewing and adding reviews on thousands of stored employers">
     <meta name="keywords" content="open review, review employer, employers search, company reviews">
     <meta name="author" content="Jed Atkinson">
 
@@ -16,10 +15,8 @@
 <h1>Open Review Portal</h1>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="employer_rankings.php">Employer Rankings</a>
+  <a href="index.php">Home</a>
   <a href="review_employer.php">Review an Employer</a>
-  <a href="employer_reviews.php">View Reviews</a>
 </nav>
 
 <div class="employer_search">

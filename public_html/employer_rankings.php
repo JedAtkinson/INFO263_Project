@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="View an overview of all reviews left on any employer on all catagroies and graphical representations">
+    <meta name="keywords" content="open review, review employer, employers search, company reviews">
+    <meta name="author" content="Jed Atkinson">
+
     <title>Employer Rankings</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,21 +21,27 @@ if (isset($_GET["employer"])) {
 
     if ($result->rowCount() === 0) {
         echo "<p>No data on this employer</p>";
-        echo "<button onclick=\"location.href='review_employer.php\">Add review</button>";
+        echo "<button onclick=\"location.href='review_employer.php?employer=".$_GET["employer"]."'\">Add review</button>";
     } else {
         $row = $result->fetch();
 
-        echo '<a href="employer_reviews.php?search_term='.$row["company_name"].'"><button type="submit" style="float: right; margin-right: 50%;">See all Reviews</button></a>';
+        echo '
+<nav style="padding: 0px;">
+    <a href="index.html">Home</a>
+    <a href="review_employer.php?employer='.$_GET["employer"].'">Add Review</a>
+    <a href="employer_reviews.php?employer='.$_GET["employer"].'">View Reviews</a>
+</nav>
+        ';
 
-        echo "<h2><img alt='".$row["company_name"]." Logo' height='16' width='16' style='padding-right: 10px;' src='http://www.google.com/s2/favicons?domain=".$row["company_url"]."'>";
+        echo "<h2><img alt='".$row["company_name"]." Logo' class='employer_logo' src='http://www.google.com/s2/favicons?domain=".$row["company_url"]."'>";
         echo $row['company_name']."</h2>";
 
-        echo '<div style="width: 50%; display: inline-block; text-align: center;">';
+        echo '<div class="left_div">';
 
         foreach ($row as $key => $value) {
             if ($value === null) $value = 0;
             $name = ucfirst(implode(" ", explode("_", $key)));
-            echo "<p><b>".$name.":</b></p><p> ".$value."</p>";
+            echo "<p><b>".$name.":</b> ".$value."</p>";
         }
 
         $out_of_5_ratings = array("career_opportunities_rating" => "Career Opportunities Rating",
@@ -52,8 +62,8 @@ if (isset($_GET["employer"])) {
 
 </div>
 
-<div style="width: 50%; display: inline-block; float: right;">
-    <canvas id="myChart"></canvas>
+<div class="right_div">
+    <canvas id="ratings_chart"></canvas>
 </div>
 
 <script>
@@ -83,7 +93,7 @@ if (isset($_GET["employer"])) {
     };
 
     const myChart = new Chart(
-        document.getElementById('myChart'),
+        document.getElementById('ratings_chart'),
         config
     );
 </script>

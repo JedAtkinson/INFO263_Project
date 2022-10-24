@@ -46,9 +46,18 @@ function searchEmployers($search_term, $num_results) {
     return $result;
 }
 
-function getEmployersReviews($employer, $range_min, $range_max) {
+function get_employer($employer_id) {
     $pdo = openConnection();
-    $query = "SELECT * FROM employerreview_s WHERE employerId = (SELECT employer_id FROM open_review.employer WHERE company_name = '" . $employer . "') LIMIT ".$range_min.", ".$range_max;
+    $query = "SELECT employer_id, company_name, company_url FROM open_review.employer WHERE employer_id = ".$employer_id.";";
+    $result = $pdo->query($query);
+    $pdo = null;
+
+    return $result;
+}
+
+function getEmployersReviews($employer_id, $range_min, $range_max) {
+    $pdo = openConnection();
+    $query = "SELECT * FROM employerreview_s WHERE employerId = $employer_id LIMIT ".$range_min.", ".$range_max;
     $result = $pdo->query($query);
     $pdo = null;
 

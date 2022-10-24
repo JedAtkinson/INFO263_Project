@@ -36,6 +36,10 @@ if ($all_set) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Leave a review on a current or previous employer">
+    <meta name="keywords" content="open review, review employer, employers search, company reviews">
+    <meta name="author" content="Jed Atkinson">
+
     <title>Review Employer</title>
 
     <link rel="stylesheet" href="css/style.css"/>
@@ -45,8 +49,16 @@ if ($all_set) {
 
 <h1>Review Employer</h1>
 
+<?php
+echo '
+<nav style="padding: 0 0 40px;">
+    <a href="index.php">Home</a>
+</nav>
+        ';
+?>
+
 <form method="get" action="review_employer.php">
-    <div style="width: 700px; display: inline-block;">
+    <div class="left_div">
     <p><label for="employer_search_box">Employer</label></p>
     <input type="text" id="employer_search_box" name="employer_search_box" required placeholder="Search" autocomplete="off" style="width: 500px">
     <div id="employer_search_suggestions"></div>
@@ -65,8 +77,8 @@ if ($all_set) {
 
     ?>
     </div>
-    <div style="width: 50%; display: inline-block; vertical-align: top;">
-
+    <div class="right_div">
+        <br><br><br>
         <label for="isCurrentJob">Current Job</label>
         <input type="checkbox" id="isCurrentJob" name="isCurrentJob">
         <br><br>
@@ -74,16 +86,14 @@ if ($all_set) {
         <input type="number" id="jobEndingYear" name="jobEndingYear" required min="1900" max="2022" step="1" value="2016">
         <br><br>
         <script>
-            $("#jobEndingYear").hide();
-            $("#jobEndingYearLabel").hide();
             $("#isCurrentJob").change(function() {
 
                 if ($("#isCurrentJob").is(':checked')) {
-                    $("#jobEndingYear").show();
-                    $("#jobEndingYearLabel").show();
-                } else {
                     $("#jobEndingYear").hide();
                     $("#jobEndingYearLabel").hide();
+                } else {
+                    $("#jobEndingYear").show();
+                    $("#jobEndingYearLabel").show();
                 }
             });
         </script>

@@ -6,7 +6,7 @@ if (isset($_GET["search"])) {
 
     while ($row = $result->fetch()) {
         echo "<div class='suggestion-item' id='".$row["employer_id"]."' tabindex='0'>
-<img alt='".$row["company_name"]." Logo' height='16' width='16' style='padding-right: 10px;' src='http://www.google.com/s2/favicons?domain=".$row["company_url"]."'>" . $row["company_name"] . "</div>";
+<img alt='".$row["company_name"]."' class='employer_logo' src='http://www.google.com/s2/favicons?domain=".$row["company_url"]."'>" . $row["company_name"] . "</div>";
     }
 }
 
@@ -16,8 +16,8 @@ if (isset($_GET["company_reviews"]) and isset($_GET["limit"])) {
 
 
     while ($row = $result->fetch()) {
-        echo "<div style='border: 2px solid black'>";
-        echo "<div style='width: 50%; display: inline-block; vertical-align: top;'>";
+        echo "<div class='review_item'>";
+        echo "<div class='left_div'>";
         foreach (array_slice($columns, 0, count($columns)/2) as $col) {
             if (strlen($row[$col]) > 0) {
                 $name = ucfirst(implode(" ", preg_split('/(?=[A-Z])/', $col)));
@@ -26,7 +26,7 @@ if (isset($_GET["company_reviews"]) and isset($_GET["limit"])) {
             }
         }
         echo '</div>';
-        echo "<div style='width: 40%; margin-left: 50px; display: inline-block; vertical-align: top;'>";
+        echo "<div class='right_div'>";
         foreach (array_slice($columns, count($columns)/2) as $col) {
             if (strlen($row[$col]) > 0) {
                 $name = ucfirst(implode(" ", preg_split('/(?=[A-Z])/', $col)));
